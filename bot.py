@@ -1,5 +1,8 @@
 import discord
 import responses
+import json
+
+json_path='settings.json'
 
 async def send_message(message, user_message, is_private):
     try:
@@ -21,7 +24,15 @@ def run_discord_bot():
 
     @client.event
     async def on_message(message):
+        with open(json_path, 'r') as file:
+           data = json.load(file)
+        prefix = data['prefix']
+        file.close()
+        
         if message.author == client.user:
+            return
+        
+        if not message.content.startswith(prefix):
             return
         
         username = str(message.author)
