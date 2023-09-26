@@ -1,0 +1,8 @@
+### __List of Commands__
+```
+1. -help
+2. -ping
+3. -roll  <number> (default: 100)
+4. -pick <choice 1> <choice 2> <choice 3>...
+5. -setprefix <new prefix>
+```
