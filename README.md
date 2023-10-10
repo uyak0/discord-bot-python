@@ -1,4 +1,4 @@
-# simple-discord-bot
+# Discord bot with Python
 ### List of commands available (so far)
 1. ping
 2. roll <value> (default: 10)
