@@ -13,6 +13,9 @@ def is_file_modified(file_path, last_modified_time):        #temporary way to ha
     current_modified_time = os.path.getmtime(file_path)
     return current_modified_time > last_modified_time
 
+def accept_reply(message: discord.Message):
+    return message.content
+
 def handle_response(message: discord.Message):       #code for handling responses from user
 
     #Note: at this point, variable "message" is of class discord.Message
@@ -80,9 +83,9 @@ def handle_response(message: discord.Message):       #code for handling response
 
         #--leguess
         case 'leguess':
-            message.add_reaction(':ok_hand:')
-            return 'Take a Guess'
-        
+            answer = random.choice(['🍎','🍌','🍊'])
+            return 'Take a guess', ['🍎','🍌','🍊']
+            
         #--help
         case 'help':
             with open('help.txt', 'r') as file:

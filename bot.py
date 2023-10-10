@@ -1,20 +1,28 @@
 import discord
 import responses
 import json
+from dotenv import dotenv_values
 
 json_path='settings.json'
 async def send_message(message: discord.Message, is_private: bool):
     # user_message = await message.channel.send(user_message)
     try:
-        response = responses.handle_response(message)
-        await message.author.send(response) 
+        response, reactions = responses.handle_response(message)
+        
+        if response != None:
+            await message.channel.send(response)
+        if reactions != None:
+            for reaction in reactions:
+                await message.add_reaction(reaction) 
+
+        
         # if is_private else await message.channel.send(response)
 
     except Exception as e:
         print(e)
 
 def run_discord_bot():
-    TOKEN = 'MTEzMjk4NTk5MTY5OTg5MDE3Ng.Gdie5A.gjtTgGqonnoNC6Tbk0V1BA_OA8KafLL2gwth2s'
+    TOKEN = dotenv_values(".env")['TOKEN']
     intents = discord.Intents.default()
     intents.message_content = True
     client = discord.Client(intents=intents)
